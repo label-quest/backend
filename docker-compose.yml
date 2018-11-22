@@ -10,4 +10,6 @@ services:
    image: python:3.7.1-alpine3.8
    depends_on:
     - database
-   command: python3 #--db_url database --db_port 5432
+   volumes:
+     - "$PWD/../backend:/backend"
+   command: python3 /backend/main.py #--db_url database --db_port 5432
