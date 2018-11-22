@@ -1,0 +1,13 @@
+version: '2'
+services:
+  database:
+   image: postgres
+   environment:
+    - "POSTGRES_PASSWORD=mysecretpassword"
+   container_name: database
+
+  api:
+   image: python:3.7.1-alpine3.8
+   depends_on:
+    - database
+   command: python3 #--db_url database --db_port 5432
