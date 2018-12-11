@@ -1,0 +1,3 @@
+# Docker compose
+API listens on port 8000
+Picture server listens on port 8080
