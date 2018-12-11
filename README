@@ -1,3 +1,7 @@
 # Docker compose
-API listens on port 8000
-Picture server listens on port 8080
+- API listens on port 8000
+- Picture server listens on port 8081
+- DB listens on port 8080
+
+DB user is postgres, database name is postgres, password is mysecretpassword.
+You can access it over localhost:5433.

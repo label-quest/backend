@@ -2,9 +2,20 @@ version: '2'
 services:
   database:
    image: postgres
+   restart: always
    environment:
     - "POSTGRES_PASSWORD=mysecretpassword"
+    - "POSTGRES_USER=postgres"
+    - "POSTGRES_DB=postgres"
+   ports:
+   - 5433:5432
    container_name: database
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 
   api:
    build:
@@ -25,5 +36,5 @@ services:
     volumes:
       - "$PWD/pictures/:/usr/local/apache2/htdocs/"
     ports:
-     - "8080:80"
+     - "8081:80"
 
