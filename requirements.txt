@@ -2,3 +2,4 @@ django
 python-decouple
 djangorestframework
 markdown
+psycopg2-binary
