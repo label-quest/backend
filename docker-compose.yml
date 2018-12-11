@@ -9,7 +9,7 @@ services:
   api:
    build:
      context: "."
-     dockerfile: Dockerfile
+     dockerfile: Dockerfile_API
    depends_on:
     - database
    volumes:
@@ -17,3 +17,13 @@ services:
    ports:
     - "8000:8000"
    command: python3 /backend/manage.py runserver 0.0.0.0:8000 #--db_url database --db_port 5432
+
+  picture_server:
+    build:
+     context: "."
+     dockerfile: Dockerfile_Pictureserver
+    volumes:
+      - "$PWD/pictures/:/usr/local/apache2/htdocs/"
+    ports:
+     - "8080:80"
+
