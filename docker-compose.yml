@@ -10,6 +10,8 @@ services:
    ports:
    - 5433:5432
    container_name: database
+   volumes:
+    - "$PWD/db_data/:/var/lib/postgresql/data"
 
   adminer:
     image: adminer
