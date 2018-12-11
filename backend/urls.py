@@ -43,5 +43,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^training_sample/', include('training_samples.urls')),
-    url(r'^label_placement/', include('label_placements.urls'))
+    url(r'^label_placement/', include('label_placements.urls')),
+    url(r'^data_set/', include('data_sets.urls'))
 ]
