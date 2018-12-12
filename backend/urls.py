@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', include('data_sets.urls')),
     path('', include('images.urls')),
-    path('', include('labels.urls'))
+    path('', include('labels.urls')),
+    path('', include('potential_labels.urls'))
 ]

@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'users',
     'data_sets',
     'images',
-    'labels'
+    'labels',
+    'potential_labels'
 ]
 
 MIDDLEWARE = [
