@@ -9,6 +9,9 @@ from potential_labels.models import PotentialLabel
 class Label(models.Model):
     x_pos = models.FloatField()
     y_pos = models.FloatField()
-    image = models.ForeignKey('images.Image', on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    potential_label = models.ForeignKey('potential_labels.PotentialLabel', on_delete=models.CASCADE)
+    potential_label = models.ForeignKey(PotentialLabel, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.potential_label.name + "/" + self.user.username

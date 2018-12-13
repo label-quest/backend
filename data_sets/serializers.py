@@ -1,8 +1,13 @@
+import sys
+sys.path.append("..")
 from rest_framework import serializers
 from .models import DataSet
+from customers.models import Customer
 
 
-class DataSetSerializer(serializers.HyperlinkedModelSerializer):
+class DataSetSerializer(serializers.ModelSerializer):
+    customer = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all())
+
     class Meta:
         model = DataSet
-        fields = ('id', 'name', 'description', 'goal', 'folder_path', 'customer_id', 'potential_label_id')
+        fields = ('id', 'name', 'description', 'goal', 'folder_path', 'customer')
