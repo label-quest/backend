@@ -1,17 +1,17 @@
 version: '2'
 services:
-  database:
-   image: postgres
-   restart: always
-   environment:
-    - "POSTGRES_PASSWORD=mysecretpassword"
-    - "POSTGRES_USER=postgres"
-    - "POSTGRES_DB=postgres"
-   ports:
-   - 5433:5432
-   container_name: database
-   volumes:
-    - "./db_data/:/var/lib/postgresql/data"
+#  database:
+#   image: postgres
+#   restart: always
+#   environment:
+#    - "POSTGRES_PASSWORD=mysecretpassword"
+#    - "POSTGRES_USER=postgres"
+#    - "POSTGRES_DB=postgres"
+#   ports:
+#   - 5433:5432
+#   container_name: database
+#   volumes:
+#    - "./db_data/:/var/lib/postgresql/data"
 
   adminer:
     image: adminer
@@ -23,8 +23,8 @@ services:
    build:
      context: "."
      dockerfile: Dockerfile_API
-   depends_on:
-    - database
+#   depends_on:
+#    - database
    volumes:
      - ".:/backend"
    ports:
