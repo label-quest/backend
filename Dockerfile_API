@@ -1,4 +1,6 @@
-FROM python:3.7.1-alpine3.8
+FROM ubuntu:18.10
+
+RUN apt-get update && apt-get install -y python3 python3-pip
 
 RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
 
@@ -7,4 +9,4 @@ RUN pip3 install -r requirements.txt
 
 COPY . /backend/
 
-CMD ["python", "/backend/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "/backend/manage.py", "runserver", "0.0.0.0:8000"]
