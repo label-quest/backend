@@ -2,14 +2,42 @@ version: '2'
 services:
   database:
    image: postgres
+   restart: always
    environment:
-    - "POSTGRES_PASSWORD=mysecretpassword"
+    - "POSTGRES_PASSWORD=mysecretpasswordwhichIshouldnevercommit"
+    - "POSTGRES_USER=postgres"
+    - "POSTGRES_DB=postgres"
+   ports:
+   - 5433:5432
    container_name: database
+   volumes:
+    - "$PWD/db_data/:/var/lib/postgresql/data"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 
   api:
-   image: python:3.7.1-alpine3.8
+   build:
+     context: "."
+     dockerfile: Dockerfile_API
    depends_on:
     - database
    volumes:
      - "$PWD/../backend:/backend"
-   command: python3 /backend/main.py #--db_url database --db_port 5432
+   ports:
+    - "8000:8000"
+   command: python3 /backend/manage.py runserver 0.0.0.0:8000 #--db_url database --db_port 5432
+   container_name: api
+
+  picture_server:
+    build:
+     context: "."
+     dockerfile: Dockerfile_Pictureserver
+    volumes:
+      - "$PWD/pictures/:/usr/local/apache2/htdocs/"
+    ports:
+     - "8081:80"
+
