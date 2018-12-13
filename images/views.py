@@ -1,7 +1,7 @@
-from rest_framework import viewsets
+import random
+from rest_framework import viewsets, views, response
 from .models import Image
 from .serializers import ImageSerializer, TrainingSampleSerializer
-import random
 
 
 class ImageView(viewsets.ModelViewSet):
@@ -9,10 +9,14 @@ class ImageView(viewsets.ModelViewSet):
     serializer_class = ImageSerializer
 
 
-class TrainingSample(viewsets.ModelViewSet):
-    images_count = Image.objects.all().count()
-    random_index = random.randint(0, images_count - 1)
-    print("RANDOM: {}".format(random_index))
+class TrainingSampleView(views.APIView):
 
-    queryset = Image.objects.order_by("?")
-    serializer_class = TrainingSampleSerializer
+    def get(self, request, format=None):
+        obj = Image.objects.order_by("?").first()
+        obj = TrainingSampleSerializer(obj)
+
+        return response.Response(obj.data)
+
+    @classmethod
+    def get_extra_actions(cls):
+        return []
