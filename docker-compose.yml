@@ -39,5 +39,5 @@ services:
     volumes:
       - "$PWD/pictures/:/usr/local/apache2/htdocs/"
     ports:
-     - "8081:80"
+     - "8082:80"
 
