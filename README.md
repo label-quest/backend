@@ -11,3 +11,8 @@ You can access it over localhost:5433.
 
 ## Migrations
 Run `docker-compose run api python3 /backend/manage.py migrate` to run the DB migrations
+
+
+
+## Google Cloud Vision
+How to integrate Google Vision: https://cloud.google.com/vision/docs/quickstart-client-libraries#client-libraries-install-python
