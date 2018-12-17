@@ -18,12 +18,13 @@ class LabelPlacementView(views.APIView):
         if 'user_id' in request_data.keys() and 'image_id' in request_data.keys() and 'placed_labels' in request_data.keys():
             user_id = request_data['user_id']
             image_id = request_data['image_id']
-            label_ids = request_data['placed_labels'].keys()
+            placed_labels = request_data['placed_labels']
 
-            for label_id in label_ids:
-                x_pos = request_data['placed_labels'][label_id]['x']
-                y_pos = request_data['placed_labels'][label_id]['y']
-                label = Label(potential_label_id=label_id, x_pos=x_pos, y_pos=y_pos, user_id=user_id, image_id=image_id)
+            for placed_label in placed_labels:
+                potential_label_id = placed_label['id']
+                x_pos = placed_label['x']
+                y_pos = placed_label['y']
+                label = Label(potential_label_id=potential_label_id, x_pos=x_pos, y_pos=y_pos, user_id=user_id, image_id=image_id)
                 label.save()
 
             return response.Response(status=200)
