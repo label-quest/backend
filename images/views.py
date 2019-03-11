@@ -1,4 +1,3 @@
-import random
 from rest_framework import viewsets, views, response
 from .models import Image
 from .serializers import ImageSerializer, TrainingSampleSerializer
