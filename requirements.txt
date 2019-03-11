@@ -1,4 +1,4 @@
-django
+django>=2
 python-decouple
 djangorestframework
 markdown
@@ -6,3 +6,6 @@ drf-extensions
 django-extensions
 psycopg2-binary
 google-cloud-vision
+keras
+scikit-image
+pandas
