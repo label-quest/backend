@@ -17,7 +17,7 @@ app = Flask(__name__)
 models = {}
 classes = {}
 number_classes = {}
-new_shape = (100, 100, 3)
+new_shape = (100, 100)
 
 # Instantiates a client
 client = vision.ImageAnnotatorClient()
@@ -46,8 +46,10 @@ def classify():
     else:
         image = Image.open(BytesIO(picture))
         content = skimage.transform.resize(np.array(image), new_shape)
-        predictions = models[dataset].predict(np.reshape(content, (1, new_shape[0], new_shape[1], new_shape[2])))
+        predictions = models[dataset].predict(
+            np.reshape(content, (1, new_shape[0], new_shape[1], len(classes[dataset]))))
         return jsonify({'descriptions': [x for _, x in sorted(zip(predictions.tolist()[0], classes[dataset]))]})
+
 
 @app.route('/train', methods=['POST'])
 def train():
@@ -55,8 +57,6 @@ def train():
     global number_classes
 
     content = request.get_json()
-    print(content['data'])
-
     x = []
     y = []
     for datapoint in content['data']:
@@ -65,9 +65,9 @@ def train():
         x.append(np.array(image))
         y.append(datapoint['label'])
 
-    x = [skimage.transform.resize(image, new_shape) for image in x]
-
     classes[content['dataset']] = set(y)
+
+    x = [skimage.transform.resize(image, (new_shape[0], new_shape[1], len(classes[content['dataset']]))) for image in x]
 
     x = np.array(x)
     y = pd.get_dummies(y).as_matrix()
