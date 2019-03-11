@@ -2,3 +2,5 @@ google-cloud-vision
 keras
 scikit-image
 pandas
+flask
+tensorflow
